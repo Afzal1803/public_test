@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html> 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="icon" href="./../static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./../static/css/index.css">
+    <link rel="stylesheet" href="./../static/css/fileOverview.css">
+    <link rel="stylesheet" href="./../static/css/main.css">
+    <title>QA Genie</title>
+    <style>
+    
+    .navbar{
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+    }
+
+    .navbar-brand img {
+        height: 40px;
+    }
+
+    .navbar-center {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+        .navbar-center {
+            position: static;
+            transform: none;
+            text-align: center;
+            width: 100%;
+        }
+    }
+    
+    .test_gen_header{
+        background-color: #175B8D;
+        border-bottom: 1px solid #E5E7EB;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .navbar-text{
+        font-family: Inter;
+        font-weight: 600 !important;
+        font-style: Bold !important;
+        font-size: 18px !important;
+        line-height: 100% !important;
+        letter-spacing: 0%;
+        color: #232428 !important;
+    }
+
+    .logo_icon{
+        height: 30px !important;
+        width: 100px !important;
+    }
+
+    .header_icons:hover{
+        cursor: pointer;
+        border: 1px solid #FFFFFF;
+    }
+
+    .logoutIcon{
+        border-radius: 6px;
+        padding: 4px;
+    }
+
+    .userName{
+        color: #ffffff !important;
+    }
+  </style>
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg px-3 test_gen_header">
+        <!-- Logo -->
+        <a class="navbar-brand" href="/projectAccess">
+            <img src="./../static/images/logo.png" alt="Logo" class="logo_icon">
+            <span class="me-1 ms-1" style="color:#cccccc">|</span>
+            <img src="./../static/images/UT-logo.png" alt="Company Logo" class="logo_icon">
+        </a>
+
+        <!-- Toggle for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarRight">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <div class="container-fluid file-Container">
+        <div class="row" style="margin: 0.8rem">
+            <div class="card fileCard">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card file-Card" style="height: 80vh; border: none;">
+                                <!-- <img src="./../static/images/setting.png" alt="setting"> -->
+                                <div class="card-body processCard-Body">
+                                    <span class="processSpan">Your link is expired. Kindly re-trigger the forgot password request again</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+    <script src="./../static/js/header.js"></script>
+</body>
+</html>
