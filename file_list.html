@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rajkumarnimod/changealert/dist/changealert.min.css">
+    <link rel="stylesheet" href="./../static/css/fileList.css">
+    <link rel="stylesheet" href="./../static/css/main.css">
+    <title>Test Case Generator</title>
+</head>
+<body>
+    {% include "header.html" %}
+    <div class="container-fluid file-Container">
+        <div class="row" style="margin: 0.8rem">
+            <div class="card fileCard">
+                <div class="card-body">
+                    <div class="cardHeader signupHeader">
+                        <div class="step-bar mb-2 mx-3">
+                            <div class="step">
+                                <img src="./../static/images/success.png" alt="tick" class="success">
+                                <div class="step-Content step-Success">Project Access</div>
+                            </div>
+                            <hr class="card-Success-hr">
+                            <div class="step">
+                                <img src="./../static/images/success.png" alt="tick" class="success">
+                                <div class="step-Content step-Success">File Overview</div>
+                            </div>
+                            <hr class="card-hr">
+                            <div class="step">
+                                <div class="circle bg-secondary">3</div>
+                                <div class="step-Content">Test Case Creation</div>
+                            </div>
+                            <hr class="card-hr">
+                            <div class="step">
+                                <div class="circle bg-secondary">4</div>
+                                <div class="step-Content">Script Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-8 col-lg-7">
+                            <div class="file-Content">
+                                <h6>Here's a list of your accessible files</h6>
+                                <!-- <div class="d-flex justify-content-between mb-2">
+                                    <input type="text" class="form-control me-2 search-Input" placeholder="Search" style="max-width: 250px;">
+                                    <button class="btn btn-outline-primary add-Btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img src="./../static/images/add.png" alt="add" class="add-Icon"> Add New Files</button>
+                                </div> -->
+                            </div>
+                            <div class="table-container">
+                                <table class="table table-hover table-fixed-header">
+                                    <thead class="table-Header">
+                                        <tr>
+                                            <th scope="col"><input type="checkbox"></th>
+                                            <th scope="col">File Name</th>
+                                            <th scope="col">File Path</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="scrollable-tbody">
+                                        {% for file in files %}
+                                        <tr>
+                                            <td><input type="checkbox" data-name="{{ file.name }}" data-path="{{ file.path }}" class="file-checkbox"></td>
+                                            <td><a href="#" class="file-link" data-path="{{ file.path }}">{{ file.name }}</a></td>
+                                            <td>{{ file.path }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="button-Div mt-2">
+                                <button class="btn btn-outline-secondary back-Btn me-2" data-bs-toggle="modal" data-bs-target="#warning_modal"><img src="./../static/images/back.png" alt="back" class="back-Icon"><span>Back</span></button>
+                                <button class="btn btn-primary generate-Btn create_testcase me-2">Generate Test Case<img src="./../static/images/next.png" alt="next" class="ms-1"></button>
+                                <button class="btn btn-primary AI-Gen_Btn" data-bs-toggle="modal" data-bs-target="#staticPrompt">Add AI prompt<img src="./../static/images/next.png" alt="next" class="ms-1" ></button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-5">
+                            <div class="card file-Card">
+                                
+                                <h6 class="file_name_header"></h6>
+                                <div class="file-preview">
+                                    <pre class="mb-0 preview_code_wrap" style="height: 100%;"><code class="preview_code">Select a file to preview
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prompt window -->
+
+    <div class="modal fade" id="staticPrompt" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Create Test Case with Prompt</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control promptText" id="promptText" rows="5" placeholder="Enter your scenario here..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary back-Btn" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary generate-Btn create_testcase">Submit and Generate Test Cases</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add nEw Field Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add New Files</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-Head mb-2">
+                    <h6>Access via Web URL</h6>
+                    <button type="button" class="btn btn-secondary add-field" style="background-color: none;"><img src="./../static/images/add.png" alt="add" class="add-Icon"> New Field</button>
+                </div>
+                <input type="text" class="form-control mb-2" placeholder="www.amazon.com">
+                <input type="text" class="form-control mb-2" placeholder="www.amazon.com">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary reset-Btn" data-bs-dismiss="modal">Reset</button>
+                <button type="button" class="btn btn-primary gen-Btn">Select Web Pages for Test Case Generation<img src="./../static/images/next.png" alt="next" class="ms-1"></button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wrning Modal -->
+    <div class="modal" id="warning_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" >
+        <div class="modal-dialog modal-alert w-100">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-warning icon-container text-center">
+                       <img src="./../static/images/warning.png" alt="warning" class="warning-Icon">
+                    </div>
+                    <h5 class="mt-2 text-center">Are You sure you want to proceed?</h5>
+                    <h6 class="mt-1 text-center">Once you go back, You won't be able to revert this!</h6>
+                    <div class="modal-button-div mt-4">
+                        <button class="btn btn-outline-secondary back-Btn me-2" data-bs-dismiss="modal"><img src="./../static/images/back.png" alt="back" class="back-Icon"><span>Back</span></button>
+                        <button class="btn btn-primary back-Btn_modal generate-Btn me-2">Proceed<img src="./../static/images/next.png" alt="next" class="ms-1"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/rajkumarnimod/changealert/dist/changealert.min.js"></script>
+    <script src="./../static/js/fileList.js"></script>
+</body>
+</html>
